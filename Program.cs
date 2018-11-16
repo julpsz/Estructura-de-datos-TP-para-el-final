@@ -26,73 +26,83 @@ namespace ConsoleApp10
                     "MATERIA: ESTRUCTURA DE DATOS\n" +        //Menu principal.
                     "EXAMEN FINAL\n" +
                     "ALUMNO: PSZONKA, JULIAN\n" +
-                    "AÑO 2018\n\n");
+                    "CICLO LECTIVO 2018\n\n");
                 Console.ReadKey();
 
             do
             {
-                Console.Clear();
-                Console.WriteLine("==== MENU PRINCIPAL ====\n\n" +
-                    "1. Crear Cola\n" +
-                    "2. Borrar Cola\n" +
-                    "3. Agregar Pedido\n" +
-                    "4. Borrar Pedido\n" +
-                    "5. Listar todos los Pedidos\n" +
-                    "6. Listar ultimo Pedido\n" +
-                    "7. Listar primer Pedido\n" +
-                    "8. Cantidad total de Pedidos\n" +
-                    "9. SALIR\n\n" +
-                    "EXTRAS:\n" +
-                    "10. Ordenar Pedidos en orden ascendente\n" +
-                    "11. Ordenar Pedidos en orden descendente\n\n");
-
-
-                Console.WriteLine("Ingrese Opcion: ");
-                opc = Convert.ToInt32(Console.ReadLine());
-
-                switch (opc)                            //Seleccion de opciones.
+                try
                 {
-                    case 1:
-                        Queue objeto;
-                        objeto = Crear_cola();
-                        cola = objeto;
-                        Console.Clear();
-                        Console.WriteLine("Cola creada con exito.\n\nPresione una tecla para continuar...\n");
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 2:
-                        cola = borrar_cola(ref cola);
-                        break;
-                    case 3:
-                        cola = agregar_pedido(ref cola);
-                        break;
-                    case 4:
-                        cola = borrar_pedido(ref cola);
-                        break;
-                    case 5:
-                        cola = listar_pedidos(ref cola);
-                        break;
-                    case 6:
-                        cola = listar_ultimo(ref cola);
-                        break;
-                    case 7:
-                        cola = listar_primer(ref cola);
-                        break;
-                    case 8:
-                        cola = cantidad_total(ref cola);
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        cola = ordenar_pedidos(ref cola);
-                        break;
-                    case 11:
-                        cola = descendente(ref cola);
-                        break;
-                }
+                    Console.Clear();
+                    Console.WriteLine("==== MENU PRINCIPAL ====\n\n" +
+                        "1. Crear Cola\n" +
+                        "2. Borrar Cola\n" +
+                        "3. Agregar Pedido\n" +
+                        "4. Borrar Pedido\n" +
+                        "5. Listar todos los Pedidos\n" +
+                        "6. Listar ultimo Pedido\n" +
+                        "7. Listar primer Pedido\n" +
+                        "8. Cantidad total de Pedidos\n" +
+                        "9. SALIR\n\n" +
+                        "EXTRAS:\n" +
+                        "10. Ordenar Pedidos en orden ascendente\n" +
+                        "11. Ordenar Pedidos en orden descendente\n\n");
 
-            } while (opc != 9);                 //Con 9 se sale del programa.
+
+                    Console.WriteLine("Ingrese Opcion: ");
+                    opc = Convert.ToInt32(Console.ReadLine());
+
+                    switch (opc)                            //Seleccion de opciones.
+                    {
+                        case 1:
+                            Queue objeto;
+                            objeto = Crear_cola();
+                            cola = objeto;
+                            Console.Clear();
+                            Console.WriteLine("Cola creada con exito.\n\nPresione una tecla para continuar...\n");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case 2:
+                            cola = borrar_cola(ref cola);
+                            break;
+                        case 3:
+                            cola = agregar_pedido(ref cola);
+                            break;
+                        case 4:
+                            cola = borrar_pedido(ref cola);
+                            break;
+                        case 5:
+                            cola = listar_pedidos(ref cola);
+                            break;
+                        case 6:
+                            cola = listar_ultimo(ref cola);
+                            break;
+                        case 7:
+                            cola = listar_primer(ref cola);
+                            break;
+                        case 8:
+                            cola = cantidad_total(ref cola);
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            cola = ordenar_pedidos(ref cola);
+                            break;
+                        case 11:
+                            cola = descendente(ref cola);
+                            break;
+                    }
+                }
+                catch (FormatException)                             //Excepcion ante presencia de error (al ingresar una letra o simbolo).
+                {
+                    Console.Clear();
+                    Console.WriteLine("Ingreso un caracter no valido.\n");
+                    Console.WriteLine("Presione una tecla para continuar...\n");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                } while (opc != 9);                 //Con 9 se sale del programa.
 
         }
 
