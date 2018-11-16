@@ -31,8 +31,8 @@ namespace ConsoleApp10
                     "8. Cantidad total de Pedidos\n" +
                     "9. SALIR\n\n" +
                     "EXTRAS:\n" +
-                    "10. Ordenar Pedidos\n" +
-                    "11. Manual de Instrucciones\n\n");
+                    "10. Ordenar Pedidos en orden ascendente\n" +
+                    "11. Ordenar Pedidos en orden descendente\n\n");
 
 
                 Console.WriteLine("Ingrese Opcion: ");
@@ -75,9 +75,9 @@ namespace ConsoleApp10
                     case 10:
                         cola = ordenar_pedidos(ref cola);
                         break;
-                    /*case 11:
-                        Manual();
-                        break;*/
+                    case 11:
+                        cola = descendente(ref cola);
+                        break;
                 }
 
             } while (opc != 9);
@@ -380,9 +380,9 @@ namespace ConsoleApp10
                 return ref cola;
             }
         }
-    
-            public static ref Queue ordenar_pedidos(ref Queue cola)
-            {
+
+        public static ref Queue ordenar_pedidos(ref Queue cola)
+        {
             try
             {
                 int num = 1;
@@ -392,10 +392,10 @@ namespace ConsoleApp10
 
                 lista_ord.Sort();                              //Ordeno la lista para mostrarla
                 Console.Clear();
-                Console.WriteLine("PEDIDOS ORDENADOS POR VALOR.\n\n");
+                Console.WriteLine("PEDIDOS ORDENADOS DE FORMA ASCENDENTE.\n\n");
                 foreach (int mostrar in lista_ord)
                 {
-                    Console.WriteLine("{0}-  {1}",num, mostrar);
+                    Console.WriteLine("{0}-  {1}", num, mostrar);
                     num++;
                 }
                 Console.WriteLine("\n\nPresione una tecla para continuar...\n");
@@ -412,12 +412,46 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            
+
+
+
 
         }
 
+        public static ref Queue descendente(ref Queue cola)
+        {
+            try
+            {
+                int num = 1;
+                ArrayList lista_desc = new ArrayList();
+                foreach (int dato in cola)                     //Copio la cola en una lista.
+                    lista_desc.Add(dato);
+
+                lista_desc.Sort();                              //Ordeno la lista para mostrarla.
+                lista_desc.Reverse();                           //Ordeno de forma descendente la lista.
+                Console.Clear();
+                Console.WriteLine("PEDIDOS ORDENADOS DE FORMA DESCENDENTE.\n\n");
+                foreach (int mostrar in lista_desc)
+                {
+                    Console.WriteLine("{0}-  {1}", num, mostrar);
+                    num++;
+                }
+                Console.WriteLine("\n\nPresione una tecla para continuar...\n");
+                Console.ReadKey();
+                Console.Clear();
+                return ref cola;
+            }
+            catch (NullReferenceException)
+            {
+                Console.Clear();
+                Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
+                Console.WriteLine("Presione una tecla para continuar...\n");
+                Console.ReadKey();
+                Console.Clear();
+                return ref cola;
+            }
+        }
+
     }
-
-
 
 }
