@@ -11,16 +11,20 @@ namespace ConsoleApp10
 {
     class Program
     {
+        
         private static Queue cola;
 
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();   
             int opc = 0;
 
 
             do
             {
-                Console.WriteLine("MENU PRINCIPAL\n\n" +
+                Console.WriteLine("******** MENU PRINCIPAL ********\n\n" +
                     "1. Crear Cola\n" +
                     "2. Borrar Cola\n" +
                     "3. Agregar Pedido\n" +
@@ -91,7 +95,7 @@ namespace ConsoleApp10
             try
             {
                 ArrayList lista = new ArrayList();
-                int borrar, posicion;
+                int borrar, posicion, num=1;
                 string sel;
 
                 foreach (int dato in cola)  //Copio contenido de la cola en una lista
@@ -103,7 +107,12 @@ namespace ConsoleApp10
                 cola.Clear();   //Borro la cola.
 
                 Console.Clear();
-                Console.WriteLine("Ingrese Pedido a borrar:\n");
+                foreach (int dato in lista)  //Copio contenido de la cola en una lista
+                {
+                    Console.WriteLine("{0}-  {1}", num, dato);
+                    num++;
+                }
+                Console.WriteLine("\n\nIngrese Pedido a borrar:\n");
                 borrar = Convert.ToInt32(Console.ReadLine());   //Guardo el Pedido a borrar.
                 posicion = lista.IndexOf(borrar);               //Obtengo la posicion del Pedido a borrar.
                 if (posicion == -1)
@@ -113,12 +122,14 @@ namespace ConsoleApp10
                     Console.WriteLine("Presione una tecla para continuar...\n");
                     Console.ReadKey();
                     Console.Clear();
+                    foreach (int copiar in lista)                   //Paso los datos de la lista sin cambios a la COLA.
+                        cola.Enqueue(copiar);
                     return ref cola;
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Pedido encontrado en la posicion {0}. BORRAR ? (s/n):\n", posicion + 1);
+                    Console.WriteLine("Borrar Pedido de la posicion {0}. Esta seguro ? (s/n):\n", posicion + 1);
                     sel = Convert.ToString(Console.ReadLine());
                     if (sel == "s")
                     {
@@ -173,6 +184,7 @@ namespace ConsoleApp10
             try
             {
                 cola.Clear();
+                Console.Clear();
                 Console.WriteLine("Cola Vaciada. Presione tecla para continuar\n");
                 Console.ReadKey();
                 Console.Clear();
@@ -364,7 +376,7 @@ namespace ConsoleApp10
                 int cant;
                 cant = cola.Count;
                 Console.Clear();
-                Console.WriteLine("Cantidad total de Pedidos cargados hasta el momento: {0}", cant);
+                Console.WriteLine("Cantidad total de Pedidos cargados hasta el momento: {0}\n", cant);
                 Console.WriteLine("Presione una tecla para continuar...\n");
                 Console.ReadKey();
                 Console.Clear();
