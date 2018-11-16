@@ -228,7 +228,7 @@ namespace ConsoleApp10
 
                 bool convertir = int.TryParse(Convert.ToString(dato), out i);       //Me fijo si la opcion ingresada se puede pasar a Int,
                                                                                     //en caso afirmativo, convertir=True (dato = numero). Caso contrario, convertir= False (caracter no valido = string).
-                if (convertir == true && dato < 1000 && dato >= 0)                  //Si el caracter es un numero y ademas esta entre 0 y 999.
+                if (convertir == true && dato < 999 && dato > 0)                  //Si el caracter es un numero y ademas esta entre 1 y 998 inclusive, lo almacena.
                 {
                     cola.Enqueue(dato);
                     Console.Clear();
@@ -241,7 +241,7 @@ namespace ConsoleApp10
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("El Pedido ingresado NO es valido. (Debe estar entre 0 y 999 inclusive).\n");
+                    Console.WriteLine("El Pedido ingresado NO es valido. (Debe estar entre 1 y 998 inclusive).\n");
                     Console.WriteLine("Presione una tecla para continuar...\n");
                     Console.ReadKey();
                     Console.Clear();
