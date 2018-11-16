@@ -12,19 +12,23 @@ namespace ConsoleApp10
     class Program
     {
         
-        private static Queue cola;
+        public static Queue cola;                                   
 
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkYellow;      //Color de fondo.
+            Console.ForegroundColor = ConsoleColor.Black;           //Color de letra.
             Console.Clear();   
             int opc = 0;
 
 
             do
             {
-                Console.WriteLine("******** MENU PRINCIPAL ********\n\n" +
+                Console.WriteLine("MATERIA: ESTRUCTURA DE DATOS\n" +        //Menu principal.
+                    "EXAMEN FINAL\n" +
+                    "ALUMNO: PSZONKA, JULIAN\n" +
+                    "AÑO 2018\n\n" +
+                    "==== MENU PRINCIPAL ====\n\n" +
                     "1. Crear Cola\n" +
                     "2. Borrar Cola\n" +
                     "3. Agregar Pedido\n" +
@@ -42,7 +46,7 @@ namespace ConsoleApp10
                 Console.WriteLine("Ingrese Opcion: ");
                 opc = Convert.ToInt32(Console.ReadLine());
 
-                switch (opc)
+                switch (opc)                            //Seleccion de opciones.
                 {
                     case 1:
                         Queue objeto;
@@ -84,30 +88,30 @@ namespace ConsoleApp10
                         break;
                 }
 
-            } while (opc != 9);
+            } while (opc != 9);                 //Con 9 se sale del programa.
 
 
 
         }
 
-        public static ref Queue borrar_pedido(ref Queue cola)
+        public static ref Queue borrar_pedido(ref Queue cola)       //Funcion que borra un pedido determinado.
         {
             try
             {
-                ArrayList lista = new ArrayList();
+                ArrayList lista = new ArrayList();      //Defino un Arraylist y variables a utilizar.
                 int borrar, posicion, num=1;
                 string sel;
 
-                foreach (int dato in cola)  //Copio contenido de la cola en una lista
+                foreach (int dato in cola)              //Copio contenido de la cola en una lista.
                 {
                     lista.Add(dato);
                 }
 
 
-                cola.Clear();   //Borro la cola.
+                cola.Clear();                            //Borro la cola.
 
                 Console.Clear();
-                foreach (int dato in lista)  //Copio contenido de la cola en una lista
+                foreach (int dato in lista)             //Copio contenido de la cola en una lista.
                 {
                     Console.WriteLine("{0}-  {1}", num, dato);
                     num++;
@@ -115,13 +119,14 @@ namespace ConsoleApp10
                 Console.WriteLine("\n\nIngrese Pedido a borrar:\n");
                 borrar = Convert.ToInt32(Console.ReadLine());   //Guardo el Pedido a borrar.
                 posicion = lista.IndexOf(borrar);               //Obtengo la posicion del Pedido a borrar.
-                if (posicion == -1)
+                if (posicion == -1)                             //Si el Pedido no se encuentra, el indice que devuelve es -1.
                 {
                     Console.Clear();
                     Console.WriteLine("Pedido inexistente.");
                     Console.WriteLine("Presione una tecla para continuar...\n");
                     Console.ReadKey();
                     Console.Clear();
+
                     foreach (int copiar in lista)                   //Paso los datos de la lista sin cambios a la COLA.
                         cola.Enqueue(copiar);
                     return ref cola;
@@ -158,7 +163,7 @@ namespace ConsoleApp10
                     return ref cola;
                 }
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)                          //Excepciones ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -171,13 +176,13 @@ namespace ConsoleApp10
         }
 
 
-        public static Queue Crear_cola()
+        public static Queue Crear_cola()                            //Funcion que crea la cola inicial.
         {
             Queue cola = new Queue();
             return cola;
         }
 
-        public static Queue borrar_cola(ref Queue cola)
+        public static Queue borrar_cola(ref Queue cola)             //Funcion que borra todo el contenido de la cola.
         {
 
 
@@ -190,7 +195,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)                               //Excepciones ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -201,7 +206,7 @@ namespace ConsoleApp10
             }
         }
 
-        public static ref Queue agregar_pedido(ref Queue cola)
+        public static ref Queue agregar_pedido(ref Queue cola)              //Funcion que agrega Pedidos a la cola.
         {
             try
             {
@@ -213,9 +218,9 @@ namespace ConsoleApp10
 
                 dato = Convert.ToInt32(Console.ReadLine());
 
-                bool convertir = int.TryParse(Convert.ToString(dato), out i);
-
-                if (convertir == true && dato < 1000 && dato >= 0)
+                bool convertir = int.TryParse(Convert.ToString(dato), out i);       //Me fijo si la opcion ingresada se puede pasar a Int,
+                                                                                    //En caso afirmativo, convertir=True. Caso contrario, convertir= False (caracter no valido).
+                if (convertir == true && dato < 1000 && dato >= 0)                  //Evaluo si el caracter es un numero y ademas esta entre 0 y 999.
                 {
                     cola.Enqueue(dato);
                     Console.Clear();
@@ -228,7 +233,7 @@ namespace ConsoleApp10
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("El valor ingresado NO es valido.\n");
+                    Console.WriteLine("El Pedido ingresado NO es valido. (Debe estar entre 0 y 999 inclusive).\n");
                     Console.WriteLine("Presione una tecla para continuar...\n");
                     Console.ReadKey();
                     Console.Clear();
@@ -236,7 +241,7 @@ namespace ConsoleApp10
                 }
             }
 
-            catch (NullReferenceException)
+            catch (NullReferenceException)                      //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla y luego cargue el dato.\n");
@@ -246,7 +251,7 @@ namespace ConsoleApp10
                 return ref cola;
 
             }
-            catch (FormatException)
+            catch (FormatException)                             //Excepcion ante presencia de error (al ingresar una letra o simbolo).
             {
                 Console.Clear();
                 Console.WriteLine("Ingreso un caracter no valido.\n");
@@ -258,7 +263,7 @@ namespace ConsoleApp10
 
         }
 
-        public static ref Queue listar_pedidos(ref Queue cola)
+        public static ref Queue listar_pedidos(ref Queue cola)  //Funcion que lista todos los pedidos cargados.
         {
             try
             {
@@ -281,7 +286,7 @@ namespace ConsoleApp10
             }
 
 
-            catch (NullReferenceException)
+            catch (NullReferenceException)                      //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -295,7 +300,7 @@ namespace ConsoleApp10
         }
 
 
-        public static ref Queue listar_ultimo(ref Queue cola)
+        public static ref Queue listar_ultimo(ref Queue cola)       //Funcion que imprime en pantalla el ultimo Pedido ingresado.
         {
             try
             {
@@ -315,7 +320,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)              //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -324,7 +329,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)         //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA esta vacia.\n");
@@ -336,12 +341,12 @@ namespace ConsoleApp10
         }
 
 
-        public static ref Queue listar_primer(ref Queue cola)
+        public static ref Queue listar_primer(ref Queue cola)       //Funcion que imprime en pantalla el primer Pedido ingresado.
         {
             try
             {
                 int primer;
-                primer = Convert.ToInt32(cola.Peek());
+                primer = Convert.ToInt32(cola.Peek());              //Obtengo el primer valor de la cola, sin extraerlo de la misma.
                 Console.Clear();
                 Console.WriteLine("Primer Pedido cargado:\n\n1-  {0}\n", primer);
                 Console.WriteLine("Presione una tecla para continuar...\n");
@@ -349,7 +354,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)                          //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -358,7 +363,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException)                       //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA esta vacia\n");
@@ -369,12 +374,12 @@ namespace ConsoleApp10
             }
         }
 
-        public static ref Queue cantidad_total(ref Queue cola)
+        public static ref Queue cantidad_total(ref Queue cola)      //Funcion que imprime en pantalla la cantidad total de pedidos ingresados.
         {
             try
             {
                 int cant;
-                cant = cola.Count;
+                cant = cola.Count;      //Obtengo cuantos elementos tiene la Cola.
                 Console.Clear();
                 Console.WriteLine("Cantidad total de Pedidos cargados hasta el momento: {0}\n", cant);
                 Console.WriteLine("Presione una tecla para continuar...\n");
@@ -382,7 +387,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)              //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -393,7 +398,7 @@ namespace ConsoleApp10
             }
         }
 
-        public static ref Queue ordenar_pedidos(ref Queue cola)
+        public static ref Queue ordenar_pedidos(ref Queue cola)     //Funcion que ordena los Pedidos de forma ascendente.
         {
             try
             {
@@ -405,7 +410,7 @@ namespace ConsoleApp10
                 lista_ord.Sort();                              //Ordeno la lista para mostrarla
                 Console.Clear();
                 Console.WriteLine("PEDIDOS ORDENADOS DE FORMA ASCENDENTE.\n\n");
-                foreach (int mostrar in lista_ord)
+                foreach (int mostrar in lista_ord)             //Imprimo en pantalla la lista ordenda.
                 {
                     Console.WriteLine("{0}-  {1}", num, mostrar);
                     num++;
@@ -415,7 +420,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)                      //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
@@ -430,7 +435,7 @@ namespace ConsoleApp10
 
         }
 
-        public static ref Queue descendente(ref Queue cola)
+        public static ref Queue descendente(ref Queue cola)         //Funcion que ordena los pedidos de forma ascendente.
         {
             try
             {
@@ -440,7 +445,7 @@ namespace ConsoleApp10
                     lista_desc.Add(dato);
 
                 lista_desc.Sort();                              //Ordeno la lista para mostrarla.
-                lista_desc.Reverse();                           //Ordeno de forma descendente la lista.
+                lista_desc.Reverse();                           //Ordeno de forma descendente la lista (en sentido contrario).
                 Console.Clear();
                 Console.WriteLine("PEDIDOS ORDENADOS DE FORMA DESCENDENTE.\n\n");
                 foreach (int mostrar in lista_desc)
@@ -453,7 +458,7 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException)                      //Excepcion ante presencia de error.
             {
                 Console.Clear();
                 Console.WriteLine("La COLA aun no esta creada, primero debe crearla.\n");
