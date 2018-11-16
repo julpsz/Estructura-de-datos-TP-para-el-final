@@ -16,19 +16,23 @@ namespace ConsoleApp10
 
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.DarkYellow;      //Color de fondo.
-            Console.ForegroundColor = ConsoleColor.Black;           //Color de letra.
+            Console.BackgroundColor = ConsoleColor.Black;      //Color de fondo.
+            Console.ForegroundColor = ConsoleColor.Green;           //Color de letra.
             Console.Clear();   
             int opc = 0;
 
+            
+                Console.WriteLine("INSTITUTO DE FORMACION TECNICO SUPERIOR Nro 18\n" +
+                    "MATERIA: ESTRUCTURA DE DATOS\n" +        //Menu principal.
+                    "EXAMEN FINAL\n" +
+                    "ALUMNO: PSZONKA, JULIAN\n" +
+                    "AÑO 2018\n\n");
+                Console.ReadKey();
 
             do
             {
-                Console.WriteLine("MATERIA: ESTRUCTURA DE DATOS\n" +        //Menu principal.
-                    "EXAMEN FINAL\n" +
-                    "ALUMNO: PSZONKA, JULIAN\n" +
-                    "AÑO 2018\n\n" +
-                    "==== MENU PRINCIPAL ====\n\n" +
+                Console.Clear();
+                Console.WriteLine("==== MENU PRINCIPAL ====\n\n" +
                     "1. Crear Cola\n" +
                     "2. Borrar Cola\n" +
                     "3. Agregar Pedido\n" +
@@ -90,8 +94,6 @@ namespace ConsoleApp10
 
             } while (opc != 9);                 //Con 9 se sale del programa.
 
-
-
         }
 
         public static ref Queue borrar_pedido(ref Queue cola)       //Funcion que borra un pedido determinado.
@@ -106,7 +108,6 @@ namespace ConsoleApp10
                 {
                     lista.Add(dato);
                 }
-
 
                 cola.Clear();                            //Borro la cola.
 
@@ -172,6 +173,15 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
+            catch (FormatException)                             //Excepcion ante presencia de error (al ingresar una letra o simbolo).
+            {
+                Console.Clear();
+                Console.WriteLine("Ingreso un caracter no valido.\n");
+                Console.WriteLine("Presione una tecla para continuar...\n");
+                Console.ReadKey();
+                Console.Clear();
+                return ref cola;
+            }
 
         }
 
@@ -184,8 +194,6 @@ namespace ConsoleApp10
 
         public static Queue borrar_cola(ref Queue cola)             //Funcion que borra todo el contenido de la cola.
         {
-
-
             try
             {
                 cola.Clear();
@@ -219,8 +227,8 @@ namespace ConsoleApp10
                 dato = Convert.ToInt32(Console.ReadLine());
 
                 bool convertir = int.TryParse(Convert.ToString(dato), out i);       //Me fijo si la opcion ingresada se puede pasar a Int,
-                                                                                    //En caso afirmativo, convertir=True. Caso contrario, convertir= False (caracter no valido).
-                if (convertir == true && dato < 1000 && dato >= 0)                  //Evaluo si el caracter es un numero y ademas esta entre 0 y 999.
+                                                                                    //en caso afirmativo, convertir=True (dato = numero). Caso contrario, convertir= False (caracter no valido = string).
+                if (convertir == true && dato < 1000 && dato >= 0)                  //Si el caracter es un numero y ademas esta entre 0 y 999.
                 {
                     cola.Enqueue(dato);
                     Console.Clear();
@@ -249,7 +257,6 @@ namespace ConsoleApp10
                 Console.ReadLine();
                 Console.Clear();
                 return ref cola;
-
             }
             catch (FormatException)                             //Excepcion ante presencia de error (al ingresar una letra o simbolo).
             {
@@ -295,8 +302,6 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-
-
         }
 
 
@@ -429,10 +434,6 @@ namespace ConsoleApp10
                 Console.Clear();
                 return ref cola;
             }
-
-
-
-
         }
 
         public static ref Queue descendente(ref Queue cola)         //Funcion que ordena los pedidos de forma ascendente.
@@ -468,7 +469,5 @@ namespace ConsoleApp10
                 return ref cola;
             }
         }
-
     }
-
 }
